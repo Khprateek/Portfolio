@@ -39,10 +39,11 @@ const Hero = () => {
   const rightTransform = scrollPosition * scrollSpeed * 3;
 
   return (
-    <div className=""
-      style={{ height: '800vh' }}>
+    <div className="inset-0 overflow-hidden"
+      style={{ height: '400vh' }}>
 
-      <div className="flex overflow-hidden h-full">
+      <div className="flex overflow-hidden h-full"
+        style={{ height: '800vh' }}>
         <div
           className="flex flex-col w-1/2 relative overflow-hidden"
           style={{
