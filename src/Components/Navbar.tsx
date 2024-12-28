@@ -1,48 +1,59 @@
-import {useState} from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
+    const lastScrollY = useRef(0);
 
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
     };
+
+    const handleScroll = useCallback(() => {
+        if (typeof window !== 'undefined') {
+            if (window.scrollY > lastScrollY.current) {
+                setIsHidden(true);
+            } else {
+                setIsHidden(false);
+            }
+            lastScrollY.current = window.scrollY;
+        }
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [handleScroll]);
+
     return (
         // Navbar
-        <nav className="sticky top-0 left-0 right-0 z-10 flex justify-between items-center gap-6 px-6 h-16 bg-back1">
+        <nav className={`fixed top-0 bg-shadow1 left-0 right-0 z-10 flex justify-between items-center gap-6 px-6 h-16 transition-transform duration-300 ${isHidden ? '-translate-y-full' : 'translate-y-0'}`}>
             <a href="#" id='brand'>
                 <img className="object-cover max-w-12 max-h-12" src="/logo2.svg" alt="Logo" />
             </a>
             <div className="hidden md:flex items-center group gap-8">
-                <Link to="/" className="text-txt1 group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
+                <Link to="/" className="text-black group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
                     Home
                 </Link>
-                <Link to="/services" className="text-txt1 group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
+                <Link to="/services" className="text-black group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
                     Projects
                 </Link>
-                <Link to="/RiskRuler" className="text-txt1 group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
+                <Link to="/RiskRuler" className="text-black group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
                     Achievements
                 </Link>
-                <Link to="/contacts" className="text-txt1 group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
+                <Link to="/contacts" className="text-black group-hover:opacity-50 hover:!opacity-100 transition-opacity duration-200">
                     Contacts
                 </Link>
             </div>
-            <Link
-                to="/Goldenway"
-                className="relative hidden md:inline-block px-4 py-1 rounded-lg text-txt1 text-lg cursor-pointer bg-gradient-to-r from-blue-600 via-purple-800 to-blue-400 group"
-            >
-                <span className="relative z-10">Golden Way</span>
-                <div className="absolute inset-[1px] bg-gray-900 rounded-lg transition-opacity duration-500 group-hover:opacity-70" />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-800 to-blue-400 rounded-lg opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
-            </Link>
             <button className="p-4 md:hidden">
-                <img className="filter invert" src="/assets/menu.png" alt="menu" onClick={toggleNav}/>
+                <img className="filter invert" src="/assets/menu.png" alt="menu" onClick={toggleNav} />
             </button>
 
-
-
             {/* Side character  */}
-            <div id='nav-dialog' className={`fixed md:hidden bg-back1 inset-0 ${isNavOpen ? 'block' : 'hidden'}`}>
+            <div id='nav-dialog' className={`fixed md:hidden bg-background1 inset-0 ${isNavOpen ? 'block' : 'hidden'}`}>
                 <div className="flex justify-between items-center px-6 h-16" id='nav-bar'>
                     <a href="#" id='brand'>
                         <img className="object-cover max-w-12 max-h-12" src="/logo2.svg" alt="Logo" />
