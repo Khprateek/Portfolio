@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 
 const Hero = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const rightDivRef = useRef(null);
+  const rightDivRef = useRef<HTMLDivElement | null>(null);
   const [initialOffset, setInitialOffset] = useState(0);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Hero = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', calculateOffset);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', calculateOffset);
@@ -36,11 +36,13 @@ const Hero = () => {
   // Adjusted scroll speeds
   const scrollSpeed = 1;
   const leftTransform = scrollPosition * scrollSpeed;
-  const rightTransform = scrollPosition * scrollSpeed * 2; // Doubled for right side
+  const rightTransform = scrollPosition * scrollSpeed * 3;
 
   return (
-    <div className="overflow-hidden min-h-[300vh]"> {/* Added min-height to ensure scrollable */}
-      <div className="flex">
+    <div className=""
+      style={{ height: '800vh' }}>
+
+      <div className="flex overflow-hidden h-full">
         <div
           className="flex flex-col w-1/2 relative overflow-hidden"
           style={{
@@ -48,6 +50,36 @@ const Hero = () => {
             transition: 'transform 0.3s cubic-bezier(0.33, 1, 0.68, 1)'
           }}
         >
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/sasuke1.png"
+            alt="Sasuke"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/sasuke1.png"
+            alt="Sasuke"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/sasuke1.png"
+            alt="Sasuke"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/sasuke1.png"
+            alt="Sasuke"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/sasuke1.png"
+            alt="Sasuke"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/sasuke1.png"
+            alt="Sasuke"
+          />
           <img
             className="w-full h-screen object-cover"
             src="/assets/sasuke1.png"
@@ -67,6 +99,36 @@ const Hero = () => {
             transition: 'transform 0.3s cubic-bezier(0.33, 1, 0.68, 1)'
           }}
         >
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/naruto1.png"
+            alt="Naruto"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/naruto1.png"
+            alt="Naruto"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/naruto1.png"
+            alt="Naruto"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/naruto1.png"
+            alt="Naruto"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/naruto1.png"
+            alt="Naruto"
+          />
+          <img
+            className="w-full h-screen object-cover"
+            src="/assets/naruto1.png"
+            alt="Naruto"
+          />
           <img
             className="w-full h-screen object-cover"
             src="/assets/naruto1.png"
